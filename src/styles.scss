@@ -1,1 +1,69 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary: #1d4ed8;
+  --primary-dark: #1e3a8a;
+  --text: #111827;
+  --text-muted: #4b5563;
+  --surface: #ffffff;
+  --surface-muted: #f9fafb;
+  --bg: #f3f4f6;
+  --border: #e5e7eb;
+  --tag-bg: #dbeafe;
+}
+
+html.dark {
+  --primary: #3b82f6;
+  --primary-dark: #60a5fa;
+  --text: #f9fafb;
+  --text-muted: #9ca3af;
+  --surface: #1f2937;
+  --surface-muted: #111827;
+  --bg: #0f172a;
+  --border: #374151;
+  --tag-bg: #1e3a8a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+a {
+  color: var(--primary);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+main:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.container {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
