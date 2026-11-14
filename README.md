@@ -1,59 +1,100 @@
-# ArchPatternsExplorer
+# Patrones de Arquitectura · Explorador Interactivo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.43.
+[![Deploy Angular to GitHub Pages](https://github.com/JSebasAM/Patrones-de-Arquitectura/actions/workflows/deploy.yml/badge.svg)](https://github.com/JSebasAM/Patrones-de-Arquitectura/actions/workflows/deploy.yml)
 
-## Development server
+Catálogo interactivo y educativo de **patrones de arquitectura de software** desarrollado por **José Sebastián Arenas Moncada** para la asignatura de Arquitectura de Software (UCEVA).
 
-To start a local development server, run:
+**Demo en GitHub Pages:** https://JSebasAM.github.io/Patrones-de-Arquitectura/
 
-```bash
-ng serve
-```
+> Captura de pantalla: pendiente de agregar en `docs/screenshot.png` (`![Captura](docs/screenshot.png)`).
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Características principales
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Catálogo tipado de 10 patrones:** Clean Architecture, Microfrontends, Cliente-Servidor, SSG, SPA, MVC, Arquitectura Hexagonal, Microservicios, Event-Driven Architecture y Arquitectura en Capas.
+- **Filtros dinámicos y búsqueda interactiva:** búsqueda reactiva instantánea y filtrado por categorías taxonómicas (Estructural, Arquitectura Web, Sistemas Distribuidos, Patrones de Dominio, Interacción y Presentación).
+- **Vista de detalle completa:** descripción técnica profunda, listas de ventajas, desventajas, recomendaciones de cuándo aplicarlo y enlaces a repositorios prácticos del portafolio.
+- **Favoritos persistentes:** guarda tus patrones predilectos en `localStorage` con tolerancia a fallos mediante bloques `try/catch`.
+- **Modo oscuro nativo:** selector de tema claro/oscuro persistente y adaptado a las preferencias del sistema.
+- **Enrutamiento por Hash:** compatible con GitHub Pages (`withHashLocation()` y `withComponentInputBinding()`).
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Tecnologías utilizadas
 
-```bash
-ng generate --help
-```
+- **Framework:** Angular 20 (componentes standalone, Signals reactivas, Router con binding de inputs)
+- **Lenguaje:** TypeScript 5.9
+- **Estilos:** SCSS nativo con variables CSS para temas claro y oscuro
+- **Pruebas:** Jest (`jest-preset-angular`) con 100% de suites en verde
+- **Documentación de código:** Compodoc
+- **Calidad de código:** ESLint (`angular-eslint`) y Prettier
+- **CI/CD:** GitHub Actions y GitHub Pages
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Instalación y ejecución local
 
 ```bash
-ng test
+# Instalar dependencias
+npm ci --legacy-peer-deps
+
+# Iniciar servidor de desarrollo en http://localhost:4200
+npm start
+
+# Compilar para producción
+npm run build
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Scripts disponibles
 
-```bash
-ng e2e
+| Script                  | Descripción                                     |
+| ----------------------- | ----------------------------------------------- |
+| `npm start`             | Inicia servidor de desarrollo Angular           |
+| `npm run build`         | Compila la aplicación para producción           |
+| `npm test`              | Ejecuta la suite de pruebas unitarias con Jest  |
+| `npm run test:watch`    | Ejecuta Jest en modo interactivo/observador     |
+| `npm run test:coverage` | Genera reporte de cobertura de código           |
+| `npm run compodoc`      | Genera la documentación técnica de arquitectura |
+| `npm run lint`          | Análisis estático con ESLint                    |
+| `npm run format`        | Formatea el código fuente con Prettier          |
+| `npm run format:check`  | Verifica que el código cumpla la guía de estilo |
+
+---
+
+## Estructura del proyecto
+
+```
+src/app/
+├── components/
+│   ├── navbar/               # Barra superior con favoritos y selector de modo oscuro
+│   └── pattern-card/         # Tarjeta interactiva con insignia, resumen y favorito
+├── data/
+│   └── patterns.data.ts      # Catálogo estático de los 10 patrones con tipado estricto
+├── models/
+│   └── pattern.model.ts      # Interfaces Pattern, PatternCategory y RelatedProject
+├── pages/
+│   ├── pattern-detail/       # Vista de detalle con ventajas, desventajas y proyecto
+│   └── patterns-list/        # Vista principal con barra de búsqueda, chips y cuadrícula
+├── services/
+│   └── patterns.service.ts   # Servicio reactivo con Signals y manejo seguro de localStorage
+└── app.routes.ts             # Enrutamiento con rutas por hash
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Pipeline de Despliegue
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+El archivo [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) define la integración continua y el despliegue automático en GitHub Pages:
+
+1. **build**: verifica lint, formato, ejecuta las pruebas Jest, genera la documentación con Compodoc y compila con `--base-href /Patrones-de-Arquitectura/`.
+2. **deploy**: despliega la carpeta `./dist/arch-patterns-explorer/browser` en GitHub Pages.
+3. **verify**: realiza sondeos `curl` con reintentos automáticos verificando respuesta HTTP 200 y presencia del marcador `<app-root`.
+
+---
+
+## Contribuir
+
+Las contribuciones siguen la convención de [Conventional Commits](CONTRIBUTING.md).

@@ -1,0 +1,82 @@
+<section class="catalog">
+  <div class="catalog__hero">
+    <h1 class="catalog__title">Explorador de Patrones de Arquitectura</h1>
+    <p class="catalog__subtitle">
+      Catálogo interactivo con los patrones estructurales, de dominio, web y distribuidos más
+      relevantes en la ingeniería de software moderna.
+    </p>
+
+    <div class="search-box">
+      <span class="search-box__icon" aria-hidden="true">🔍</span>
+      <input
+        #searchInput
+        type="search"
+        class="search-box__input"
+        placeholder="Buscar por nombre, categoría, palabras clave..."
+        [value]="service.searchQuery()"
+        (input)="onSearchChange($event)"
+        aria-label="Buscar patrón de arquitectura"
+      />
+      @if (service.searchQuery()) {
+        <button
+          type="button"
+          class="search-box__clear"
+          (click)="clearSearch(searchInput)"
+          aria-label="Limpiar búsqueda"
+        >
+          ✕
+        </button>
+      }
+    </div>
+
+    <div class="categories" role="group" aria-label="Filtrar por categoría">
+      @for (category of service.categories(); track category) {
+        <button
+          type="button"
+          class="chip"
+          [class.chip--active]="service.selectedCategory() === category"
+          (click)="service.setCategory(category)"
+          [attr.aria-pressed]="service.selectedCategory() === category"
+        >
+          {{ category }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="catalog__info">
+    <span class="catalog__count">
+      Mostrando <strong>{{ service.filteredPatterns().length }}</strong> de
+      <strong>{{ service.patterns().length }}</strong> patrones
+      @if (service.onlyFavorites()) {
+        <em>(solo favoritos)</em>
+      }
+    </span>
+  </div>
+
+  @if (service.filteredPatterns().length > 0) {
+    <div class="grid">
+      @for (pattern of service.filteredPatterns(); track pattern.id) {
+        <div class="grid__item">
+          <app-pattern-card [pattern]="pattern" />
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <span class="empty-state__icon" aria-hidden="true">🔎</span>
+      <h3 class="empty-state__title">No se encontraron patrones</h3>
+      <p class="empty-state__desc">
+        No hay resultados que coincidan con "{{ service.searchQuery() }}" en la categoría
+        seleccionada.
+      </p>
+      <button
+        type="button"
+        class="btn-reset"
+        (click)="service.setSearchQuery(''); service.setCategory('Todas'); searchInput.value = ''"
+      >
+        Restablecer filtros
+      </button>
+    </div>
+  }
+</section>

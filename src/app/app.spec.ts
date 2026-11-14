@@ -1,23 +1,28 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
+import { routes } from './app.routes';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  it('debería crear el componente raíz', () => {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render title', () => {
+  it('debería renderizar la barra de navegación y el contenedor principal', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, arch-patterns-explorer');
+    const el = fixture.nativeElement as HTMLElement;
+
+    expect(el.querySelector('app-navbar')).toBeTruthy();
+    expect(el.querySelector('main#contenido')).toBeTruthy();
+    expect(el.querySelector('footer')).toBeTruthy();
   });
 });

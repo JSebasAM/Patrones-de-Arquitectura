@@ -1,0 +1,86 @@
+<article class="detail">
+  <div class="detail__nav">
+    <a routerLink="/" class="btn-back"> <span aria-hidden="true">←</span> Volver al catálogo </a>
+  </div>
+
+  @if (pattern(); as p) {
+    <header class="detail__header">
+      <div class="detail__meta">
+        <span class="category-chip">{{ p.categoria }}</span>
+        <button
+          type="button"
+          class="btn-fav"
+          (click)="toggleFavorite()"
+          [class.btn-fav--active]="service.isFavorite(p.id)"
+          [attr.aria-label]="
+            service.isFavorite(p.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'
+          "
+        >
+          <span aria-hidden="true">{{ service.isFavorite(p.id) ? '★' : '☆' }}</span>
+          <span class="btn-fav__text">
+            {{ service.isFavorite(p.id) ? 'En Favoritos' : 'Guardar en Favoritos' }}
+          </span>
+        </button>
+      </div>
+
+      <h1 class="detail__title">{{ p.nombre }}</h1>
+      <p class="detail__summary">{{ p.resumen }}</p>
+    </header>
+
+    @if (p.proyectoRelacionado; as proy) {
+      <aside class="project-box" aria-labelledby="proyecto-relacionado-label">
+        <span class="project-box__icon" aria-hidden="true">🚀</span>
+        <div class="project-box__body">
+          <span id="proyecto-relacionado-label" class="project-box__label">
+            Proyecto práctico que aplica este patrón:
+          </span>
+          <a
+            [href]="proy.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-box__link"
+            [attr.aria-label]="'Ver repositorio del ' + proy.nombre + ' en GitHub (pestaña nueva)'"
+          >
+            {{ proy.nombre }} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </aside>
+    }
+
+    <section class="section">
+      <h2 class="section__title">Descripción y Fundamentos</h2>
+      <p class="section__body">{{ p.descripcion }}</p>
+    </section>
+
+    <div class="pros-cons-grid">
+      <section class="pros-box">
+        <h2 class="pros-box__title"><span aria-hidden="true">✓</span> Ventajas</h2>
+        <ul class="pros-box__list">
+          @for (ventaja of p.ventajas; track ventaja) {
+            <li>{{ ventaja }}</li>
+          }
+        </ul>
+      </section>
+
+      <section class="cons-box">
+        <h2 class="cons-box__title"><span aria-hidden="true">⚠</span> Desventajas y Desafíos</h2>
+        <ul class="cons-box__list">
+          @for (desventaja of p.desventajas; track desventaja) {
+            <li>{{ desventaja }}</li>
+          }
+        </ul>
+      </section>
+    </div>
+
+    <section class="section section--highlight">
+      <h2 class="section__title">¿Cuándo usar este patrón?</h2>
+      <p class="section__body">{{ p.cuandoUsarlo }}</p>
+    </section>
+  } @else {
+    <div class="not-found">
+      <h2>Patrón no encontrado</h2>
+      <p>El identificador "{{ id() }}" no corresponde a ningún patrón del catálogo.</p>
+      <a routerLink="/" class="btn-primary">Regresar al catálogo</a>
+    </div>
+  }
+</article>

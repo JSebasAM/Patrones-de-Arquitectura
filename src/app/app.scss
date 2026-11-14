@@ -1,0 +1,35 @@
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background: var(--primary-dark);
+  z-index: 100;
+
+  &:focus {
+    top: 0.5rem;
+  }
+}
+
+.footer {
+  margin-top: 4rem;
+  padding-block: 2rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+
+  &__inner {
+    text-align: center;
+
+    p {
+      margin: 0.25rem 0;
+    }
+  }
+
+  &__note {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+}
