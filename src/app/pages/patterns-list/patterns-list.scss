@@ -1,0 +1,154 @@
+.catalog {
+  padding-block: 2rem;
+
+  &__hero {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto 2.5rem;
+  }
+
+  &__title {
+    margin: 0 0 0.75rem;
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  &__subtitle {
+    margin: 0 0 1.75rem;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 36rem;
+  margin: 0 auto 1.5rem;
+
+  &__icon {
+    position: absolute;
+    left: 1rem;
+    pointer-events: none;
+    font-size: 1rem;
+    opacity: 0.6;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.85rem 2.5rem 0.85rem 2.75rem;
+    font-size: 1rem;
+    background: var(--surface);
+    color: var(--text);
+    border: 2px solid var(--border);
+    border-radius: 999px;
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.2);
+    }
+  }
+
+  &__clear {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+
+    &:hover {
+      color: var(--text);
+    }
+  }
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.chip {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--primary);
+  }
+
+  &--active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 1rem;
+
+  &__icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  &__desc {
+    color: var(--text-muted);
+    margin: 0 0 1.5rem;
+  }
+}
+
+.btn-reset {
+  padding: 0.6rem 1.25rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--primary-dark);
+  }
+}
