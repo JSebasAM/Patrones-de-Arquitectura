@@ -1,0 +1,38 @@
+<article class="card">
+  <div class="card__header">
+    <span class="category-chip">{{ pattern().categoria }}</span>
+    <button
+      type="button"
+      class="btn-fav"
+      (click)="toggleFavorite($event)"
+      [class.btn-fav--active]="service.isFavorite(pattern().id)"
+      [attr.aria-label]="
+        service.isFavorite(pattern().id)
+          ? 'Quitar ' + pattern().nombre + ' de favoritos'
+          : 'Agregar ' + pattern().nombre + ' a favoritos'
+      "
+      [title]="service.isFavorite(pattern().id) ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+    >
+      <span aria-hidden="true">{{ service.isFavorite(pattern().id) ? '★' : '☆' }}</span>
+    </button>
+  </div>
+
+  <h3 class="card__title">
+    <a [routerLink]="['/patron', pattern().id]" class="card__link">{{ pattern().nombre }}</a>
+  </h3>
+
+  <p class="card__summary">{{ pattern().resumen }}</p>
+
+  @if (pattern().proyectoRelacionado; as proy) {
+    <div class="card__project-badge" title="Aplicado en taller práctico">
+      <span aria-hidden="true">🛠️</span>
+      <span class="card__project-name">{{ proy.nombre }}</span>
+    </div>
+  }
+
+  <div class="card__footer">
+    <a [routerLink]="['/patron', pattern().id]" class="btn-detail">
+      Ver detalle completo <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
